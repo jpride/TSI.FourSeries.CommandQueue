@@ -8,7 +8,8 @@ namespace TSI.FourSeries.CommandQueue
     public class CommandQueue
     {
         public Queue<string> CommandQueueObj = new Queue<string>();
-        
+        public event EventHandler<ProcessQueueEventArgs> ProcessQueueEventCall;
+
 
         public CommandQueue()
         { 
@@ -30,6 +31,7 @@ namespace TSI.FourSeries.CommandQueue
                     cmd = CommandQueueObj.Dequeue()
                 };
 
+
                 if (!ProcessQueueEventCall.Equals(null))
                 {
                     ProcessQueueEventCall(this, args);
@@ -37,6 +39,6 @@ namespace TSI.FourSeries.CommandQueue
             }
         }
 
-        public event EventHandler<ProcessQueueEventArgs> ProcessQueueEventCall;
+        
     }
 }
